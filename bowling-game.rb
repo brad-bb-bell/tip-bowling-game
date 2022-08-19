@@ -6,6 +6,7 @@ class BowlingGame
   def score(pins)
     score = nozeros(pins)
     score = spares(score)
+    score = strikes(score)
     score.reduce(0) { |total, score| total + score }
   end
 
@@ -32,5 +33,19 @@ class BowlingGame
       index += 1
     end
     spares
+  end
+
+  def strikes(pins)
+    index = 0
+    strikes = []
+    while index < pins.length
+      if pins[index] == "X"
+        strikes << 10 + pins[index + 1] + pins[index + 2]
+      else
+        strikes << pins[index]
+      end
+      index += 1
+    end
+    strikes
   end
 end
