@@ -58,5 +58,12 @@ RSpec.describe BowlingGame do
 
       expect(subject.score(late_strike)).to eq(113)
     end
+
+    it "scores a game with an 'X' in the tenth frame" do
+      endgame = [1, 5, 4, 4, 8, "/", 5, 3, "X", "X", 2, 3, 8, "/", 7, 1, "X", 5, 4]
+      subject = described_class.new
+
+      expect(subject.score(endgame)).to eq(123)
+    end
   end
 end
