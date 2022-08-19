@@ -32,7 +32,11 @@ class BowlingGame
           spares << 20
           spares << first_score
         end
-        spares << (10 - pins[index - 1]) + pins[index + 1]
+        if pins[index + 1] == "X"
+          spares << (10 - pins[index - 1]) + 10
+        else
+          spares << (10 - pins[index - 1]) + pins[index + 1]
+        end
       else
         spares << pins[index]
       end
