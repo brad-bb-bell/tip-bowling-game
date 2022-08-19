@@ -46,7 +46,14 @@ class BowlingGame
     strikes = []
     while index < pins.length
       if pins[index] == "X"
-        strikes << 10 + pins[index + 1] + pins[index + 2]
+        if pins[index + 1] == "X"
+          strikes << 20
+          if pins[index + 2] != "X"
+            strikes << pins[index + 2]
+          end
+        else
+          strikes << 10 + pins[index + 1] + pins[index + 2]
+        end
       else
         strikes << pins[index]
       end
