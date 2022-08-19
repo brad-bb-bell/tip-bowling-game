@@ -18,10 +18,10 @@ RSpec.describe BowlingGame do
     end
 
     it "scores a game with -'s for 0's" do
-      simple_2 = [1, 5, 4, 4, 8, "-", 5, 3, "-", "-", 4, 5, 2, 3, 8, 1, 7, 1, 1, 1]
+      simple_two = [1, 5, 4, 4, 8, "-", 5, 3, "-", "-", 4, 5, 2, 3, 8, 1, 7, 1, 1, 1]
       subject = described_class.new
 
-      expect(subject.score(simple_2)).to eq(63)
+      expect(subject.score(simple_two)).to eq(63)
     end
 
     it "scores a game with '/' for spares" do
@@ -36,6 +36,13 @@ RSpec.describe BowlingGame do
       subject = described_class.new
 
       expect(subject.score(strikes)).to eq(97)
+    end
+
+    it "scores a game with a '/' in the frame after an 'X'" do
+      running_marks = [1, 5, 4, 4, 8, "/", 5, 3, "X", 4, "/", 2, 3, 8, "/", 7, 1, 1, 1]
+      subject = described_class.new
+
+      expect(subject.score(running_marks)).to eq(101)
     end
   end
 end

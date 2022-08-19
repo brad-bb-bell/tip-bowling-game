@@ -26,6 +26,12 @@ class BowlingGame
     spares = []
     while index < pins.length
       if pins[index] == "/"
+        if pins[index - 2] == "X"
+          first_score = spares.pop
+          spares.pop
+          spares << 20
+          spares << first_score
+        end
         spares << (10 - pins[index - 1]) + pins[index + 1]
       else
         spares << pins[index]
