@@ -4,19 +4,33 @@ class BowlingGame
   end
 
   def score(pins)
-    score = pins.nozeros
-    score.reduce(0) { |sum, x| sum + x }
+    score = nozeros(pins)
+    score = spares(score)
+    score.reduce(0) { |total, score| total + score }
   end
 
-  def nozeros
-    nozeros = []
-    pins.each do |x|
-      if x == "-"
-        nozeros << 0
+  def nozeros(pins)
+    nozeros = pins.map do |score|
+      if score == "-"
+        score = 0
       else
-        nozeros << x
+        score = score
       end
     end
-    return nozeros
+    nozeros
+  end
+
+  def spares(pins)
+    index = 0
+    spares = []
+    while index < pins.length
+      if pins[index] == "/"
+        spares << (10 - pins[index - 1]) + pins[index + 1]
+      else
+        spares << pins[index]
+      end
+      index += 1
+    end
+    spares
   end
 end
