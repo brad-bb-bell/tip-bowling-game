@@ -65,4 +65,8 @@ endgame = [1,5,  4,4,  8,'/',  5,3,  'X',  'X',  2,3,  8,'/',  7,1,  'X',  5,4]
 # The rare perfect game. Twelve strikes in a row. Notice that for our extra throws we
 # knocked down ten pins each. So every frame, including frame 10, was worth 30 points.
 # Score: 300
+<<<<<<< HEAD
 perfect = ['X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X']
+=======
+perfect = ['X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X',  'X']
+>>>>>>> 7cf636dd68f4dc2aabe417c742a527916f5c5732
