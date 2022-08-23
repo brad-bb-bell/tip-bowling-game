@@ -7,7 +7,6 @@ class BowlingGame
     score = no_zeros(pins)
     score = check_extra_frames(score)
     score = spares(score)
-    p score
     score = strikes(score)
     score.reduce(0) { |total, score| total + score }
   end
@@ -36,6 +35,11 @@ class BowlingGame
     end
     if pins[-3] == "X" && pins[-2] != "X" && pins[-1] != "X"
       @deduction = pins[-1] + pins[-2]
+    end
+    if pins[-3] == "X" && pins[-2] == "X" && pins[-1] == "X"
+      @addition = 60
+      pins.delete_at(-1)
+      pins.delete_at(-2)
     end
     pins
   end
@@ -71,19 +75,26 @@ class BowlingGame
       if pins[index] == "X"
         if pins[index + 1] == "X" && pins[index + 2] == "X"
           strikes << 30
-        elsif pins[index + 1] == "X" && pins[index + 2] != "X"
+        elsif pins[index + 1] == "X" && pins[index + 2] != "X" && !@addition
           strikes << 20
           strikes << pins[index + 2]
-        else
+        elsif !@addition && pins[index + 2]
           strikes << 10 + pins[index + 1] + pins[index + 2]
         end
       else
-        strikes << pins[index]
+        if @frames <= 20
+          strikes << pins[index]
+        elsif @deduction
+          strikes << pins[index]
+        end
       end
       index += 1
     end
     if @deduction && @frames > 20
       return strikes << 0 - @deduction
+    end
+    if @addition
+      return strikes << @addition
     end
     strikes
   end
